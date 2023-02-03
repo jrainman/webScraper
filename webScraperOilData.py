@@ -20,3 +20,10 @@ from pathlib import Path
 import glob
 import os
 import zipfile
+
+# Assign the chrome driver to a variable
+driver = webdriver.Chrome("/Users/mutumbo/Desktop/BTG/chromeDriver/chromedriver")
+
+####################### Opening the Website #########################
+# Go to the webpage of interest
+driver.get("https://www.petrinex.ca/PD/Pages/APD.aspx")
