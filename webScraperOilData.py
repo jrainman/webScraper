@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Created on Fri Feb 3 16:12:47 2023
 
@@ -34,3 +36,9 @@ page_load_wait_time = 5 # in seconds
 # Wait up to 120s before assuming something is wrong with the download
 max_wait_time_for_download = 120 
 time.sleep(page_load_wait_time) # wait a certain number of seconds
+
+## Important Folders
+# This is the folder containing our monthly petrinex data folders
+data_folder = "/Users/mutumbo/Desktop/BTG/Data"
+# Referencing the downloads folder
+downloads_path = "/Users/mutumbo/Desktop/BTG/Downloads"
