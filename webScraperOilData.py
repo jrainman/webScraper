@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Feb 3 16:12:47 2023
-
 @author: joshrainbow
 
 """
@@ -12,6 +11,7 @@ Created on Fri Feb 3 16:12:47 2023
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
 
 # Date and time related imports
 import time
@@ -29,7 +29,7 @@ driver = webdriver.Chrome("/Users/mutumbo/Desktop/BTG/chromeDriver/chromedriver"
 ####################### Opening the Website #########################
 # Go to the webpage of interest
 driver.get("https://www.petrinex.ca/PD/Pages/APD.aspx")
-
+print(driver.title)
 
 # Wait for the page to load
 page_load_wait_time = 5 # in seconds
@@ -42,3 +42,7 @@ time.sleep(page_load_wait_time) # wait a certain number of seconds
 data_folder = "/Users/mutumbo/Desktop/BTG/Data"
 # Referencing the downloads folder
 downloads_path = "/Users/mutumbo/Desktop/BTG/Downloads"
+
+####################### Utilizing the Search bar #########################
+
+search = driver.find_element(By.ID,"ctl00_ctl45_csr_sbox")
