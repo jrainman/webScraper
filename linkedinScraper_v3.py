@@ -36,3 +36,8 @@ page_load_wait_time = 5 # in seconds
 max_wait_time_for_download = 120 
 time.sleep(page_load_wait_time) # wait a certain number of seconds
 
+
+####################### Utilizing the Search bars #########################
+
+searchKeyword = driver.find_element(By.ID,"jobs-search-box-keyword-id-ember2827")
+searchLocation = driver.find_element(By.ID,"jobs-search-box-location-id-ember2827")
