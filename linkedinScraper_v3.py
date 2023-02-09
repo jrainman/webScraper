@@ -7,37 +7,30 @@ Created on Mon Feb 6 12:12:47 2023
 """
 ################################# Imports ################################
 # Imports for scraping
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
-
-# Date and time related imports
+import csv
+import requests
+from bs4 import BeautifulSoup
 import time
-from datetime import datetime
-
-# Libraries needed for moving files around
-from pathlib import Path
-import glob
-import os
-import zipfile
-
-# Assign the chrome driver to a variable
-driver = webdriver.Chrome("/Users/mutumbo/Desktop/BTG/chromeDriver/chromedriver")
-
-####################### Opening the Website #########################
-# Go to the webpage of interest
-driver.get("https://www.linkedin.com/jobs/")
-print(driver.title)
-
-# Wait for the page to load
-page_load_wait_time = 5 # in seconds
-# Wait up to 120s before assuming something is wrong with the download
-max_wait_time_for_download = 120 
-time.sleep(page_load_wait_time) # wait a certain number of seconds
 
 
-####################### Utilizing the Search bars #########################
+# setting URL
+url = 'https://www.linkedin.com/jobs/search?keywords=Data+Science&location=Canada&geoId=&trk=public_jobs_jobs-search-bar_search-submit&original_referer=https://www.linkedin.com/jobs/search?keywords=data%20science&location=Calgary%2C%20Alberta%2C%20Canada&geoId=102199904&trk=public_jobs_jobs-search-bar_search-submit&position=1&pageNum=0&original_refer'
 
-searchKeyword = driver.find_element(By.ID,"jobs-search-box-keyword-id-ember2827")
-searchLocation = driver.find_element(By.ID,"jobs-search-box-location-id-ember2827")
+response = requests.get(url)
+print(response)
+
+'''
+before we can start extracting any data from the page, we need to parse the raw HTML data
+making it easier to navigate using CSS selectors
+'''
+
+# create a BS4 object by passing response.content as the first argument
+soup = BeautifulSoup(response.content, 'html.parser')
+
+jobTitle = soup.find('h3', class_='base-search-card__title').text
+print(jobTitle)
+
+'''
+
+
+'''
