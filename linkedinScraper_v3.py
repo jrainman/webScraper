@@ -31,6 +31,10 @@ jobTitle = soup.find('h3', class_='base-search-card__title').text
 print(jobTitle)
 
 '''
-
-
+now we need to get around the problem of moving through the pages
 '''
+def linkedinScraper(webpage, pageNumber):
+    nextPage = webpage + str(pageNumber)
+    print(str(pageNumber))
+    response = requests.get(nextPage)
+    soup = BeautifulSoup(response.content, 'html.parser')
