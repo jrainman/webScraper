@@ -42,12 +42,10 @@ writer.writerow(['Title', 'Company', 'Location', 'Link'])
 
 def linkedinScraper(webpage, pageNumber):
     nextPage = webpage + str(pageNumber)
-    #print(str(pageNumber))
+    print(str(pageNumber))
     response = requests.get(nextPage)
     soup = BeautifulSoup(response.content, 'html.parser')
-    print(nextPage)
     print(response)
-    print(pageNumber)
     
     jobs = soup.find_all('div', class_='base-card relative w-full hover:no-underline focus:no-underline base-card--link base-search-card base-search-card--link job-search-card')
     
@@ -57,19 +55,21 @@ def linkedinScraper(webpage, pageNumber):
         jobLocation = job.find('span', class_='job-search-card__location').text.strip()
         jobLink = job.find('a', class_='base-card__full-link')['href']
     
-    writer.writerow([jobTitle.encode('utf-8'), 
-                     jobCompany.encode('utf-8'), 
-                     jobLocation.encode('utf-8'), 
-                     jobLink.encode('utf-8')])
+    writer.writerow([jobTitle, 
+                     jobCompany, 
+                     jobLocation, 
+                     jobLink])
     
     print("Data written to CSV")
     
     if pageNumber < 25:
-        pageNumber = pageNumber + 25
+        pageNumber = pageNumber + 1
         linkedinScraper(webpage, pageNumber)
     else:
         file.close()
-    print("File closed")
-
-linkedinScraper('https://www.linkedin.com/jobs/search?keywords=Data+Science&location=Canada&geoId=&trk=public_jobs_jobs-search-bar_search-submit&original_referer=https://www.linkedin.com/jobs/search?keywords=data%20science&location=Calgary%2C%20Alberta%2C%20Canada&geoId=102199904&trk=public_jobs_jobs-search-bar_search-submit&position=1&pageNum=0&start=', 0)
+        print("Scraping complete")
+        
+url = 'https://ca.linkedin.com/jobs/search?keywords=Data+Science&location=Canada&geoId=101174742&trk=public_jobs_jobs-search-bar_search-submit&position=1&pageNum=0&start='
+start = 0
+linkedinScraper(url, start)
 
