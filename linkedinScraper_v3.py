@@ -55,15 +55,15 @@ def linkedinScraper(webpage, pageNumber):
         jobLocation = job.find('span', class_='job-search-card__location').text.strip()
         jobLink = job.find('a', class_='base-card__full-link')['href']
     
-    writer.writerow([jobTitle, 
-                     jobCompany, 
-                     jobLocation, 
-                     jobLink])
+    writer.writerow([jobTitle.encode('utf-8'), 
+                     jobCompany.encode('utf-8'), 
+                     jobLocation.encode('utf-8'), 
+                     jobLink.encode('utf-8')])
     
     print("Data written to CSV")
     
-    if pageNumber < 25:
-        pageNumber = pageNumber + 1
+    if pageNumber < 100:
+        pageNumber += 25
         linkedinScraper(webpage, pageNumber)
     else:
         file.close()
